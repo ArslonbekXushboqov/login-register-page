@@ -1,6 +1,6 @@
 import sqlite3 as sql
 from os import system
-
+from time import sleep
 db = "baza.db"
 
 with sql.connect(db) as con:
@@ -20,8 +20,17 @@ if s=='r':
     try:
         system("cls")
         fname = str(input("Ismingizni kiriting: "))
+        while len(fname)==0:
+            system("cls")
+            print("Ismni kiritish majburiy! ")
+            fname = str(input("Ismingizni kiriting: "))
         system("cls")
         lname = str(input("Familiyangizni kiriting: "))
+        system("cls")
+        while len(lname)==0:
+            system("cls")
+            print("Familiyani kiritish majburiy!")
+            lname = str(input("Familiyangizni kiriting: "))
         system("cls")
         age = int(input("Yoshingizni kiriting: "))
         system("cls")
@@ -94,7 +103,6 @@ elif s=='l':
                     if h==p[0]:
                         system("cls")
                         y = input("Yangi parolni kiriting: ")
-
                         con = sql.connect(db)
                         cur = con.cursor()
                         cur.execute("UPDATE user SET passw = ? WHERE passw = ?",(y, p[0],))
@@ -121,4 +129,6 @@ elif s=='l':
             print("Parol no\'to\'g\'ri!")
     else:
         print("Bunday login bazada mavjud emas")
-        
+sleep(3)
+system("cls")
+system("python main.py")
